@@ -1,0 +1,189 @@
+<div class="row">
+  <div class="col-md-2">
+    <div class="bg_1 justify-content-center align-items-center">
+      <h5 class="text-center"><i>List of monitored stock codes</i></h5>
+    </div>
+    <div>
+      <table class="table">
+        <thead>
+          <tr style="background-color: rgb(202, 149, 200);">
+            <th scope="col">#</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Price</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of stocks; let i = index" style="background-color: rgb(13, 167, 13)">
+            <th scope="row">{{ (currentPage - 1) * pageSize + i + 1 }}</th>
+            <td><b>{{ item.stock_code }}</b></td>
+            <td><b>{{ item.starting_price }} - {{ item.ending_price }}</b></td>
+            <td>
+                <i class="fa fa-eye  cursor-pointer mr-3" aria-hidden="true" (click)="openModal(item)" data-toggle="modal" data-target="#stockDetailModal"></i>
+                <i class="fa fa-trash cursor-pointer" aria-hidden="true" (click)="deleteItem(item)"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <app-stock-detail-modal [stockDetail]="selectedStock"></app-stock-detail-modal>
+    </div>
+    <div>
+      <ul class="pagination cursor-pointer">
+        <li class="page-item" [ngClass]="{ 'disabled': isFirstPage }">
+          <a class="page-link"  (click)="setPage(currentPage - 1)" tabindex="-1">Previous</a>
+        </li>
+        <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index" [ngClass]="{ 'active': currentPage === (i + 1) }">
+          <a class="page-link"  (click)="setPage(i + 1)">{{ i + 1 }}</a>
+        </li>
+        <li class="page-item" [ngClass]="{ 'disabled': isLastPage }">
+          <a class="page-link"  (click)="setPage(currentPage + 1)">Next</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="col-md-7 full-height">
+    <iframe id="iframe-id" src="https://fireant.vn/charts" class="full-height"
+      style="width: 100%; border: none;"></iframe>
+  </div>
+  <div class="col-md-3">
+    <div class="row">
+      <!-- <div class="col-md-6">
+        <button class="btn mt-2" style="background-color: rgb(162, 0, 255);">
+          <input [(ngModel)]="stockCode" (ngModelChange)="onInputChange()" type="text"
+            class="form-control border-radius" id="exampleInputEmail1" aria-describedby="emailHelp"
+            placeholder="Nhập mã cổ phiếu">
+        </button>
+      </div> -->
+      <div class="col mt-2">
+        <label for="stockCode">
+          <b>
+          Stock Code
+        </b>
+        <span class="text-danger">*</span></label>
+        <input [(ngModel)]="stockCode" (ngModelChange)="onInputChange()" type="text"
+        class="form-control border-radius" id="exampleInputEmail1" aria-describedby="emailHelp"
+        placeholder="Enter Stock Code"  id="stockCode">
+      </div>
+      
+      <div class="col-md-6 mt-2">
+        <div class="button-container">
+          <label for="Image">
+            <b>
+              Image
+            </b>
+            <span class="text-danger">*</span>
+          </label>
+          <button type="button" class="btn border-radius" style="background-color: rgb(13, 167, 13);">
+            <b>Stock Code Image</b>
+            <span class="text-danger">*</span>
+            <i class="fas fa-upload"></i> <!-- Biểu tượng tải lên -->
+          </button>
+          <input id="Image" type="file" (change)="onFilesSelected($event)" class="file-input" />
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col">
+      <label for="reasonForStockSelection">
+         <b>Reason</b>
+        <span class="text-danger">*</span>
+      </label>
+      <textarea [(ngModel)]="reasonForStockSelection" (ngModelChange)="onInputChange()" type="text"
+        class="form-control border-radius" placeholder="Enter the reason for choosing the stock"
+        style="resize: none; height: 70px;"  id="reasonForStockSelection"></textarea>
+    </div>
+  </div>
+    <div class="row mt-2">
+      <div class="col">
+        <label for="startPrice">
+          <b>
+            Starting Price
+          </b>
+          <span class="text-danger">*</span></label>
+        <input [(ngModel)]="startingPrice" type="number" class="form-control border-radius" id="startPrice"
+          placeholder="Enter Starting Price" min="0" step="0.05" (ngModelChange)="onInputChange()">
+      </div>
+      <div class="col">
+        <label for="endPrice">
+          <b>
+            Ending Price
+          </b><span class="text-danger">*</span> </label>
+        <input [(ngModel)]="endingPrice" type="number" class="form-control border-radius" id="endPrice"
+          placeholder="Enter ending price" min="0" step="0.05" (ngModelChange)="onInputChange()">
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col">
+        <label for="startDate">
+          <b>Start date</b>
+         <span class="text-danger">*</span></label>
+        <input [(ngModel)]="startDate" type="date" class="form-control border-radius" id="startDate"
+          placeholder="Select start date" (ngModelChange)="onInputChange()">
+      </div>
+      <div class="col">
+        <label for="endDate"><b>End date</b><span class="text-danger">*</span></label>
+        <input [(ngModel)]="endDate" type="date" class="form-control border-radius" id="endDate"
+          placeholder="Select end date" (ngModelChange)="onInputChange()">
+      </div>
+    </div>
+    <div class="row mt-2 justify-content-center" *ngIf="isCreateFailed">
+      <div class="form-group">
+        <div *ngIf="isCreateFailed" class="alert-login-fail alert-danger p-2" role="alert">
+          {{ errorMessage }}
+        </div>
+      </div>
+    </div>
+    
+    <div>
+      <div class="row mt-2 mr-2">
+        <div class="album">
+          <!-- Hiển thị ảnh đầu tiên lớn hơn -->
+          <div *ngIf="imgObject.length > 0" class="image-container">
+            <img  [src]="imgObject[0].imageUrl" alt="Uploaded Image" class="main-image cursor-pointer"
+              (click)="openModalImg(imgObject[0])" data-toggle="modal" data-target="#stockDetailModalImg" />
+            <!-- Dấu X để xóa hoặc đóng -->
+            <span class="close-icon" style="background-color: red;" (click)="removeImage(imgObject[0])">&times;</span>
+          </div>
+      
+          <!-- Hiển thị các ảnh nhỏ hơn trong thumbnail gallery -->
+          <div class="thumbnail-gallery">
+            <div *ngFor="let img of imgObject.slice(1)" class="image-container ">
+              <img [src]="img.imageUrl" alt="Uploaded Image" class="thumbnail-image cursor-pointer"
+                (click)="openModalImg(img)" data-toggle="modal" data-target="#stockDetailModalImg" />
+              <span class="close-icon"  style="background-color: red;"  (click)="removeImage(img)">&times;</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+      <div class="modal fade" *ngIf="isModalImgVisible" id="stockDetailModalImg" role="dialog"
+        aria-labelledby="stockDetailModalLabel" aria-hidden="true">
+        <div class="modal-footer" style="background-color: rgb(47, 0, 255);" (click)="closeModalImg()">
+          <button type="button" class="btn btn-secondary">Close</button>
+        </div>
+        <div class="row" >
+          <div class="col text-center" style="padding-right: 1px;">
+            <div class="img-show">
+              <!-- Lặp qua mảng hình ảnh -->
+              <img *ngIf="imageUrlItem" [src]="imageUrlItem" alt="Uploaded Image" class="img-thumbnail" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col text-right mr-4">
+        <button style="background-color: rgb(13, 167, 13);" type="button" class="btn  mt-2 border-radius btn-lg" [disabled]="!isSaveButtonEnabled"
+          (click)="save()"><b>Save</b></button>
+        <!-- <button class="btn btn-success mt-2 disabled border-radius btn-lg">
+          <span class="spinner-border spinner-border-sm"></span>
+          Save
+        </button> -->
+      </div>
+    </div>
+  </div>
+</div>

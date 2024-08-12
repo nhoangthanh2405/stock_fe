@@ -1,0 +1,53 @@
+<!-- stock-detail-modal.component.html -->
+<div class="modal fade" id="stockDetailModal" tabindex="-1" role="dialog" aria-labelledby="stockDetailModalLabel" style="margin-left: 10px;"
+    aria-hidden="true">
+    <div class="modal-dialog modal-auto-width" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="stockDetailModalLabel">Stock Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="endPrice">Mã cổ phiếu: <b> {{ stockDetail?.stock_code }}</b></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="endPrice">Lý do chọn mã cổ phiếu: <b>{{ stockDetail?.reason_for_stock }}</b></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="startPrice">Giá bắt đầu: <b>{{ stockDetail?.starting_price }}</b></label>
+                    </div>
+                    <div class="col">
+                        <label for="startPrice">Giá kết thúc: <b>{{ stockDetail?.ending_price }}</b></label>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col">
+                        <label for="startDate">Ngày bắt đầu: <b>{{ stockDetail?.start_date | date }}</b></label>
+                    </div>
+                    <div class="col">
+                        <label for="endDate">Ngày kết thúc: <b>{{ stockDetail?.end_date | date }}</b></label>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col text-center">
+                        <div class="img-show">
+                            <!-- Lặp qua mảng hình ảnh -->
+                            <img *ngFor="let imageUrl of stockDetail?.img_ids" [src]="imageUrl" alt="Uploaded Image" class="img-thumbnail" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer "  >
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: rgb(47, 0, 255);">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
