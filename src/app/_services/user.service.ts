@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const API_URL = 'http://stockbe-production.up.railway.app/api/test/';
+const API_URL = 'https://stockbe-production.up.railway.app/api/test/';
 
 
 @Injectable({
