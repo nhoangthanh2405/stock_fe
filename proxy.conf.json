@@ -1,0 +1,8 @@
+{
+  "/api": {
+    "target": "https://stockbe-production.up.railway.app",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
