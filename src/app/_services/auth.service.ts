@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { StorageService } from './storage.service';
 
-const AUTH_API = 'http://stockbe-production.up.railway.app/api/auth/';
+const AUTH_API = 'https://stockbe-production.up.railway.app/api/auth/';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
