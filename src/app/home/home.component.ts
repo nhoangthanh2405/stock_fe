@@ -213,6 +213,8 @@ export class HomeComponent implements OnInit {
     }
     this.enableSaveButton();
   }
+
+  
   deleteItem(stock : StockSelection): void{
     if(stock.id){
       this.stockService.deleteItem(stock.id).subscribe(response => {

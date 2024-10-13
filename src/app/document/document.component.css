@@ -1,0 +1,96 @@
+  .left-column {
+    border-right: 1px solid #ddd;
+    padding-right: 15px;
+  }
+  .right-column {
+    padding-left: 15px;
+  }
+
+  .toggle-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .btn-toggle {
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  .btn-on {
+    background-color: #28a745;
+    color: white;
+  }
+  .btn-off {
+    background-color: #dc3545;
+    color: white;
+  }
+  .btn-add {
+    background-color: #dc6a35;
+    color: white;
+  }
+  .btn-toggle.active {
+    border: 2px solid #000;
+  }
+  .button-container {
+    position: relative;
+    display: inline-block;
+  }  
+  .file-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* Ẩn thẻ input */
+    cursor: pointer; /* Hiển thị con trỏ như nút bấm */
+  }
+  .thumbnail {
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    border-radius: 3px; /* Bo góc nhẹ */
+    object-fit: cover; /* Đảm bảo ảnh được cắt vừa khung */
+    cursor: pointer;
+  }
+  .image-container {
+    position: relative;
+  }
+  
+  .image-wrapper {
+    position: relative;
+    display: inline-block;
+    margin: 5px;
+  }
+    
+  .remove-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .cursor-pointer{
+    cursor: pointer;
+  }
+  .carousel-container {
+    position: relative;
+    width: 750px;  /* Chiều rộng cố định của carousel */
+    height: 750px; /* Chiều cao cố định của carousel */
+    overflow: hidden;
+    margin: 0 auto; /* Căn giữa carousel */
+  }

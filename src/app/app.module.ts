@@ -16,6 +16,7 @@ import { BoardUserComponent } from './board-user/board-user.component';
 import { httpInterceptorProviders } from './_helpers/http.interceptor';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { StockDetailModalComponent } from './stock-detail-modal/stock-detail-modal.component';
+import { DocumentComponent } from './document/document.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { StockDetailModalComponent } from './stock-detail-modal/stock-detail-mod
     BoardModeratorComponent,
     BoardUserComponent,
     ForgotPasswordComponent,
-    StockDetailModalComponent
+    StockDetailModalComponent,
+    DocumentComponent
   ],
   imports: [
     BrowserModule,

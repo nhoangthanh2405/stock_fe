@@ -10,6 +10,7 @@ import { BoardModeratorComponent } from './board-moderator/board-moderator.compo
 import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { AuthGuard } from './auth.guard';  // Import AuthGuard
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { DocumentComponent } from './document/document.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'user', component: BoardUserComponent, canActivate: [AuthGuard] },
   { path: 'mod', component: BoardModeratorComponent, canActivate: [AuthGuard] },
   { path: 'admin', component: BoardAdminComponent, canActivate: [AuthGuard] },
+  { path: 'document', component: DocumentComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

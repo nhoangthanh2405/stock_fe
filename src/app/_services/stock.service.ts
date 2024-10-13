@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { StockSelection } from '../model/stock-selection';
 import { Stock } from '../model/stock';
+import { ChartIndicator } from '../model/ChartIndicator';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -10,8 +11,13 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class StockService {
-  private apiStockUrl = 'https://stockbe-production.up.railway.app/api/stock'; // Địa chỉ backend của bạn
-  private apiUrl = 'https://stockbe-production.up.railway.app/api'; // Địa chỉ backend của bạn
+  //PROD
+  // private apiStockUrl = 'https://stockbe-production.up.railway.app/api/stock'; // Địa chỉ backend của bạn
+  // private apiUrl = 'https://stockbe-production.up.railway.app/api'; // Địa chỉ backend của bạn
+
+  //DEV
+  private apiStockUrl = 'http://localhost:8080/api/stock'; // Địa chỉ backend của bạn
+  private apiUrl = 'http://localhost:8080/api'; // Địa chỉ backend của bạn
 
   constructor(private http: HttpClient) { }
 
@@ -37,4 +43,5 @@ export class StockService {
   getStocksByUserId(userId: number):Observable<any> {
     return this.http.get(`${ this.apiStockUrl}/user/${userId}`);
   }
+
 }

@@ -1,0 +1,120 @@
+<div class="row mt-1 bg-dark" style="color: white;" >
+  <div class="toggle-buttons">
+    <button class="btn-toggle btn-on" (click)="handleAction('Theory')">Theory</button>
+    <button class="btn-toggle btn-off" (click)="handleAction('Chart')">Chart</button>
+    <!-- Button trigger modal -->
+    <button class="btn-toggle btn-add" data-toggle="modal" data-target="#addStockChart"
+      (click)="handleAction('Add indicator')">Add indicator</button>
+  </div>
+</div>
+
+<div class="row mt-1 bg-dark" style="color: white;">
+  <div class="toggle-buttons">
+    <button class="btn-toggle" style="background-color: rgb(255, 205, 233);"><b>Document</b> > <span> <b>{{actions}}</b>
+      </span></button>
+  </div>
+</div>
+
+<div class="row mt-1 bg-dark" style="color: white;">
+  <!-- Cột bên trái -->
+  <div class="col-md-3 left-column" >
+    <h4>Indicator List</h4>
+    <select class="custom-select"  (change)="onIndicatorChange($event)">
+      <option *ngFor="let item of chartIndicatorSelection" [value]="item.id">
+        {{item.indicator_theory}}
+      </option>
+      <!-- Thêm các tùy chọn sản phẩm khác tại đây -->
+    </select>
+  </div>
+
+<!-- Cột bên phải -->
+<div class="col-md-9 right-column ">
+  <h4>Details about the {{indicatorSelection?.indicator_theory}} indicator</h4>
+
+  <div id="carouselExampleInterval" class="carousel slide"  data-bs-touch="false" data-bs-interval="false">
+    <div class="carousel-inner">
+      <!-- Lặp qua các hình ảnh và thêm class 'active' cho phần tử đầu tiên -->
+      <div class="carousel-item" *ngFor="let img of imgsData; let i = index" [ngClass]="{'active': i === 0}">
+        <img [src]="img" class="d-block carousel-container" alt="...">
+      </div>
+    </div>
+    <button  class="carousel-control-prev" type="button" data-target="#carouselExampleInterval" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-target="#carouselExampleInterval" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </button>
+  </div>
+</div>
+
+
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addStockChart" tabindex="-1" role="dialog" aria-labelledby="stockDetailModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: rgb(0, 140, 255); color: white;">
+        <h5 class="modal-title" id="stockDetailModalLabel"> <b>Add Indicator</b></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col mt-2">
+            <label for="stockCode"><b>Indicator theory</b> <span class="text-danger">*</span></label>
+            <input [(ngModel)]="indicatorTheory" type="text" class="form-control border-radius" id="stockCode"
+            (ngModelChange)="onInputChange()"
+              placeholder="Enter indicator theory">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mt-4">
+            <div class="button-container">
+              <label><b>Indicator theory image</b> <span class="text-danger">*</span></label>
+              <button type="button" class="btn border-radius" style="background-color: rgb(13, 167, 13); color: white;">
+                <b>Upload Image</b>
+                <i class="fas fa-upload"></i> <!-- Biểu tượng tải lên -->
+              </button>
+              <input type="file" class="file-input" (change)="onFilesSelectedIndicator($event)" />
+            </div>
+            <div class="image-container mt-2">
+              <div class="image-wrapper" *ngFor="let img of imgObjectIndicator">
+                <img [src]="img.imageUrl" alt="Image 4" class="thumbnail">
+                <span class="remove-icon" (click)="removeImageIndicator(img)">&times;</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mt-4">
+            <div class="button-container">
+              <label><b>Chart image</b> <span class="text-danger">*</span></label>
+              <button type="button" class="btn border-radius" style="background-color: rgb(13, 167, 13); color: white;">
+                <b>Upload Image</b>
+                <i class="fas fa-upload"></i> <!-- Biểu tượng tải lên -->
+              </button>
+              <input type="file" class="file-input" (change)="onFilesSelectedChart($event)" />
+            </div>
+            <div class="image-container mt-2">
+              <div class="image-wrapper" *ngFor="let img of imgObjectChart">
+                <img [src]="img.imageUrl" alt="Image 4" class="thumbnail">
+                <span class="remove-icon" (click)="removeImageChar(img)">&times;</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"><b>Close</b></button>
+        <button type="button" class="btn" data-dismiss="modal" style="color: white;background-color: rgb(0, 140, 255);"
+        [disabled]="!isSaveButtonEnabled"
+          (click)=" save()"><b>Save</b></button>
+      </div>
+    </div>
+  </div>
+</div>
