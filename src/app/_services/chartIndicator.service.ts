@@ -10,10 +10,10 @@ const httpOptions = {
 })
 export class ChartIndicatorService {
   //PROD
-  // private apiUrl = 'https://stockbe-production.up.railway.app/api/chart-indicator'; // Địa chỉ backend của bạn
+  private apiUrl = 'https://stockbe-production.up.railway.app/api/chart-indicator'; // Địa chỉ backend của bạn
 
   //DEV
-  private apiUrl = 'http://localhost:8080/api/chart-indicator'; // Địa chỉ backend của bạn
+  // private apiUrl = 'http://localhost:8080/api/chart-indicator'; // Địa chỉ backend của bạn
 
   constructor(private http: HttpClient) { }
 

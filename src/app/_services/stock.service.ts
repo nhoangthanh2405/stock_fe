@@ -12,12 +12,12 @@ const httpOptions = {
 })
 export class StockService {
   //PROD
-  // private apiStockUrl = 'https://stockbe-production.up.railway.app/api/stock'; // Địa chỉ backend của bạn
-  // private apiUrl = 'https://stockbe-production.up.railway.app/api'; // Địa chỉ backend của bạn
+  private apiStockUrl = 'https://stockbe-production.up.railway.app/api/stock'; // Địa chỉ backend của bạn
+  private apiUrl = 'https://stockbe-production.up.railway.app/api'; // Địa chỉ backend của bạn
 
-  //DEV
-  private apiStockUrl = 'http://localhost:8080/api/stock'; // Địa chỉ backend của bạn
-  private apiUrl = 'http://localhost:8080/api'; // Địa chỉ backend của bạn
+  // //DEV
+  // private apiStockUrl = 'http://localhost:8080/api/stock'; // Địa chỉ backend của bạn
+  // private apiUrl = 'http://localhost:8080/api'; // Địa chỉ backend của bạn
 
   constructor(private http: HttpClient) { }
 
